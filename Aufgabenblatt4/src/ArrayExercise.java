@@ -25,13 +25,38 @@ public class ArrayExercise {
 			System.out.print(i + " ");
 		}
 		
-		for (int i : emptArr ) {
-			System.out.println( i );
+		for (int i = 0; i < emptArr.length; i++ ) {
 			if ( emptArr[i] == 0 ) {
-				emptArr[i] = (int)( ( Math.random() * 20 ) + 1);
+				emptArr[i] = (int)( Math.random() * 20 ) + 1;
 			}
 		}
+		System.out.println();
+		for ( int i : emptArr ) {
+			System.out.print(i + " ");
+		}
 		
-	}
+		int firstVal = emptArr[0];
+		for ( int i = 0; i < emptArr.length; i++) {
+			emptArr[i] = emptArr[( i + 1 ) % emptArr.length];
+		}
+		emptArr[( emptArr.length - 1 )] = firstVal;
+		
+		System.out.println();
+		for ( int i : emptArr ) {
+			System.out.print(i + " ");
+		}
+		
+		int maxVal = emptArr[0];
+		int indexOfMaxVal = 0;
+		for ( int i = 1; i < emptArr.length; i++ ) {
+			if ( emptArr[i] > maxVal) {
+				maxVal = emptArr[i];
+				indexOfMaxVal = i;
+			}
+		}
+		System.out.println();
+		System.out.println("Die grösste Zahl befindet sich an Position "+indexOfMaxVal+" und hat den Wert "+maxVal+".");
+		
+	}	
 
 }

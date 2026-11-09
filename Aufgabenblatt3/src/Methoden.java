@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // author: Erik Hagmüller
 public class Methoden {
 
@@ -55,4 +56,19 @@ public class Methoden {
 		return querSumme;
 	}
 
+=======
+
+public class Methoden {
+
+	static long calculateCubicNumber(long n) {
+		
+		// Gebe die Zahl hoch 3 zurück.
+		return n * n * n;
+	}
+	
+	static long sumOfCubes(long n) {
+		
+	}
+		
+>>>>>>> eb5df09 (Aufgabenblatt3 gesichert)
 }

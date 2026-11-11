@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*  Copyright (C) 1999  (Jens Scheffler)
 
     This program is free software; you can redistribute it and/or modify
@@ -758,4 +757,3 @@ public class In {
     }
 
 }
->>>>>>> eb5df09 (Aufgabenblatt3 gesichert)

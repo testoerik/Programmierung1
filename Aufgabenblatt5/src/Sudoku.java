@@ -1,7 +1,6 @@
-/**
- * Musterlösung zu Blatt 4, Sudoku
+/*
  * 
- * @author Tobias Lauer
+ * @author Erik Hagmüller
  */
 public class Sudoku {
 
@@ -9,25 +8,16 @@ public class Sudoku {
 		// Erstellen eines leeren Sudoku-Gitters
 		int[][] sudokuGrid = new int[9][9];
 
-		// (b) Aufrufen der Methode showSudoku zur Anzeige des leeren Sudokus
-		showSudoku(sudokuGrid);
-
-		// (c) Einfügen mit Methode insert - 20 Felder
-		insert(sudokuGrid, 0, 0, 9); // Zeile 0, Spalte 0, Zahl 9
-		insert(sudokuGrid, 0, 1, 9); // Zeile 0, Spalte 1, Zahl 9
-		// conflictInRow should return true.
-		System.out.println(conflictInRow(sudokuGrid, 0, 0));
-		
-		// weitere Tests
-		insert(sudokuGrid, 1, 0, 2);
-		insert(sudokuGrid, 1, 1, 2);
-		System.out.println(conflictInRow(sudokuGrid, 1, 0));
-		
-		insert(sudokuGrid, 7, 2, 3);
-		insert(sudokuGrid, 8, 2, 3);
-		System.out.println(conflictInColumn(sudokuGrid, 1, 0));
-		// (b)Sudoku mit den eingefügten Zahlen
-		System.out.println("\nSudoku nach Befüllung:");
+		// Fill the grid
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				for (int k = 1; k <= 9; k++) {
+					if (tryNumber(sudokuGrid, i, j, k)) {
+						break;
+					}
+				}
+			}
+		}
 		showSudoku(sudokuGrid);
 	}
 
@@ -70,14 +60,13 @@ public class Sudoku {
 
 	// Aufgabenblatt 5 (a)
 	public static boolean conflictInRow(int[][] grid, int row, int col) {
-		// check if row and column are valid values
-		if ((row < 0) || (col < 0)) {
+		if ((row < 0 || row >= 9) || (col < 0) || (col >= 9) || (grid[row][col] == 0)) {
 			return false;
 		}
 
 		int valInRow = grid[row][col];
 		for (int i = 0; i < 9; i++) {
-			if ((valInRow == grid[row][i]) && (i != row)) {
+			if ((valInRow == grid[row][i]) && (i != col)) {
 				return true;
 			}
 		}
@@ -86,18 +75,65 @@ public class Sudoku {
 
 	// Aufgabenblatt 5 (b)
 	public static boolean conflictInColumn(int[][] grid, int row, int col) {
-		// check if row and column are valid values
-		if ((row < 0) || (col < 0)) {
+
+		if ((row < 0 || row >= 9) || (col < 0) || (col >= 9) || (grid[row][col] == 0)) {
 			return false;
 		}
 
 		int valInCol = grid[row][col];
 		for (int j = 0; j < 9; j++) {
-			if ((valInCol == grid[row][j]) && (valInCol != col)) {
+			if ((valInCol == grid[j][col]) && (j != row)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	// Aufgabe 5 (c)
+	public static boolean conflictInSquare(int[][] grid, int row, int col) {
+
+		if ((row < 0 || row >= 9) || (col < 0) || (col >= 9) || (grid[row][col] == 0)) {
+			return false;
+		}
+
+		int startRow = row - (row % 3);
+
+		int startCol = col - (col % 3);
+
+		for (int i = startRow; i < startRow + 3; i++) {
+
+			for (int j = startCol; j < startCol + 3; j++) {
+
+				if ((grid[i][j] == grid[row][col]) && ((i != row) || (j != col))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	// Aufgabe 5 (d)
+	public static boolean isConflict(int[][] grid, int row, int col) {
+
+		if ((row < 0 || row >= 9) || (col < 0) || (col >= 9) || (grid[row][col] == 0)) {
+			return false;
+		}
+
+		if (conflictInRow(grid, row, col) || (conflictInColumn(grid, row, col)) || (conflictInSquare(grid, row, col))) {
+			return true;
+		}
+		return false;
+	}
+
+	// Aufgabe 5 (e)
+	public static boolean tryNumber(int[][] grid, int row, int col, int zahl) {
+		if (grid[row][col] == 0) {
+			grid[row][col] = zahl;
+			if (isConflict(grid, row, col)) {
+				grid[row][col] = 0;
+				return false;
+			}
+		}
+		return true;
+	}
 }

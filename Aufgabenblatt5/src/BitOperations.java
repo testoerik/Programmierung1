@@ -21,11 +21,7 @@ public class BitOperations {
 		 * bitMask: das heißt number hat an Position 11 keine 1.
 		 */
 		int res = number & bitMask;
-		if (res == bitMask) {
-			System.out.println(1);
-		} else {
-			System.out.println(0);
-		}
+		System.out.println( res == bitMask ? 1 : 0);
 	}
 
 	// (b)
@@ -42,10 +38,11 @@ public class BitOperations {
 			 */
 			int bitMask = 1;
 			bitMask = bitMask << k;
-			/* number wird wieder mit bitMask UND-verknüpft.
-			* Dann genau das gleiche Prinzip, wie vorhin: Sollte number an Position k eine 1 stehen haben,
-			*  so hat res den gleichen Wert wie bitMask.
-			*/
+			/*
+			 * number wird wieder mit bitMask UND-verknüpft. Dann genau das gleiche Prinzip,
+			 * wie vorhin: Sollte number an Position k eine 1 stehen haben, so hat res den
+			 * gleichen Wert wie bitMask.
+			 */
 			int res = bitMask & number;
 			if (res == bitMask) {
 				System.out.println(1);
@@ -68,23 +65,31 @@ public class BitOperations {
 	// (d)
 	static int unsetBit(int number, int k) {
 		int tmpNum = 1;
-		
+
 		// Die 1 wird um k-Positionen nach links verschoben.
 		tmpNum = tmpNum << k;
 
 		// Anschließend wird die 1 an Position k zu 0 und der Rest zu 1.
 		tmpNum = ~tmpNum;
 
-		// Nun wird die UND-Verknüpfung wieder angewendet. So wird das Bit an Position k geflippt, gleichzeitig werden die anderen Bits nicht geändert.
+		// Nun wird die UND-Verknüpfung wieder angewendet. So wird das Bit an Position k
+		// geflippt, gleichzeitig werden die anderen Bits nicht geändert.
 		int res = number & tmpNum;
 
 		return res;
-
+	}	
+// (d) zweite Möglichket von unsetBit
+	static int unsetBit2( int number, int k ) {
+		int bitMask = 1 << k;
+		
+		// 0 ist das neutrale Element der ODER-Verknüpfung, 0 ist das inverse Element der UND-Verknüpfung
+		// 1 ist das neutrale Element der UND-Verknüpfung
+		return number & ~bitMask;
 	}
 
+
 	/*
-	 * (e)
-	 * Vertausche die Werte von x und y.
+	 * (e) Vertausche die Werte von x und y.
 	 * 
 	 */
 	static void dreimalXOR(int x, int y) {

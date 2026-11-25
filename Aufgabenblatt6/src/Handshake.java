@@ -12,7 +12,7 @@ public class Handshake {
 		/* Was soll für n = 1 zurückgegeben werden ?
 		 * 0, da ein Teilnehmer sich nicht selber die Hand schüttelt.
 		 */
-		if ( n == 1 ) {
+		if ( n <= 1 ) {
 			return 0;
 		}
 		else {

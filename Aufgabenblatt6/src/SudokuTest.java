@@ -16,7 +16,7 @@ public class SudokuTest {
 		System.out.println(sudokuField1.isEmpty()); // Da das Feld auf 10 gesetzt wurde ist es nicht mehr leer und
 													// isEmpty() dementsprechend false.
 		sudokuField1.clear(); // Das Feld wurde auf seinen Startzustand zurückgesetzt.
-		System.out.println(sudokuField1.isEmpty()); // isEmpty() muss daher zurück geben.
+		System.out.println(sudokuField1.isEmpty()); // isEmpty() muss daher true zurück geben.
 
 		SudokuField sudokuField2 = new SudokuField(10); // Erstelle eine neue Instanz (sudokuField2) von der Klasse
 														// SudokuField und setze die Zahl auf 10.
